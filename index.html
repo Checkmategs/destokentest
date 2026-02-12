@@ -1,20 +1,32 @@
 <!doctype html>
 <html>
 <head>
+  <meta charset="UTF-8">
+  <title>Figma Token Demo</title>
   <style>
-    :root {
-      --color-primary: #0A84FF;
-    }
-
     button {
-      background: var(--color-primary);
+      background: var(--color-primary, #000); /* fallback */
       color: white;
       padding: 16px;
       border: none;
+      font-size: 18px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
   <button>Test</button>
+
+  <script>
+    // Загружаем JSON токен
+    fetch('tokens.json')
+      .then(res => res.json())
+      .then(data => { й
+        // Превращаем Primary токен в CSS-переменную
+        document.documentElement.style.setProperty('--color-primary', data.Primary.$value);
+        console.log('Token applied:', data.Primary.$value);
+      })
+      .catch(err => console.error('Failed to load tokens:', err));
+  </script>
 </body>
 </html>
